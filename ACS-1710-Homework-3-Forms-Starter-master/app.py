@@ -209,14 +209,19 @@ def gif_search():
     if request.method == 'POST':
         # TODO: Get the search query & number of GIFs requested by the user, store each as a 
         # variable
+        search_query = request.form.get("search_query")
+        limit = request.form.get("quantity")
 
         response = requests.get(
             TENOR_URL,
             {
                 # TODO: Add in key-value pairs for:
                 # - 'q': the search query
+                "q" : search_query,
                 # - 'key': the API key (defined above)
+                "key" : API_KEY,
                 # - 'limit': the number of GIFs requested
+                "limit" : limit
             })
 
         gifs = json.loads(response.content).get('results')
@@ -225,7 +230,7 @@ def gif_search():
             'gifs': gifs
         }
 
-         # Uncomment me to see the result JSON!
+        # Uncomment me to see the result JSON!
         # Look closely at the response! It's a list
         # list of data. The media property contains a 
         # list of media objects. Get the gif and use it's 

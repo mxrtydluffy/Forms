@@ -37,10 +37,13 @@ Gif Search
     <!-- TODO: Use a for loop to show each GIF separately in an img tag (and place each one in a 
         separate p tag to show on separate lines). You can get the GIF's image URL by using: 
         gif['media'][0]['gif']['url'] -->
-
-    <p>
-        <img src="https://your/gif/url/goes/here" alt="GIF">
-    </p>
+    {% if gifs %}
+        {% for item in gifs %}
+        <p>
+            <img src="{{item.media.item.url}}" alt="GIF">
+        </p>
+        {% endfor %}
+    {% endif %}
 </section>
 
 {% endblock %}
